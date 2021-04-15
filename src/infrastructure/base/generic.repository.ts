@@ -1,15 +1,4 @@
-import { Inject, Injectable } from "@nestjs/common";
-import { BaseFirestoreRepository, IEntity } from "fireorm";
-import * as Admin from 'firebase-admin';
+import {  Injectable } from '@nestjs/common';
+import { MongoRepository } from "typeorm";
 @Injectable()
-export abstract class GenericRepository<T extends IEntity> {
-  public firebase: any;
-  constructor(@Inject('DATABASE_CONNECTION') public readonly admin: Admin) {
-    this.firebase=admin;
-  }
-  public create(entity: T) {
-    firebase.database().ref('users/' + entity.id).set(JSON.stringify(entity));
-
-  }
-
-}
+export abstract class GenericRepository<T> extends MongoRepository<T>{}

@@ -7,8 +7,8 @@ export class RegisterOphthalmologistService{
   async execute(request: RegisterOphthalmologistRequest): Promise<RegisterOphthalmologistResponse>{
 
     try{
-      const searchedOphthalmologist = await this.unitOfWork.ophthalmologistRepository.findById(request.id);
-      if (searchedOphthalmologist == undefined) {
+      const searchedOphthalmologist: Ophthalmologist = await this.unitOfWork.ophthalmologistRepository.findOne(request.id);
+     if (searchedOphthalmologist == undefined) {
         const newOphthalmologist: Ophthalmologist= new Ophthalmologist();
         newOphthalmologist.id=request.id;
         newOphthalmologist.names=request.names;
@@ -19,9 +19,7 @@ export class RegisterOphthalmologistService{
         newOphthalmologist.cellPhone=request.cellPhone;
         newOphthalmologist.address=request.address;
         newOphthalmologist.age=request.age;
-        var savedOphthalmologist = await this.unitOfWork.complete(
-          async () => await this.unitOfWork.ophthalmologistRepository.create(newOphthalmologist),
-        );
+       const savedOphthalmologist = await this.unitOfWork.ophthalmologistRepository.save(newOphthalmologist);
         if (savedOphthalmologist != undefined ) {
           return new RegisterOphthalmologistResponse(
             'oftalmologo registrado satisfactoriamente'

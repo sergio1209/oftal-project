@@ -1,10 +1,10 @@
 import { Ophthalmologist } from "../../domain/entity/ophthalmologist";
 import { GenericRepository } from "../base/generic.repository";
 import { Injectable } from "@nestjs/common";
-import { CustomRepository } from "fireorm";
+import { EntityRepository } from "typeorm";
 
 @Injectable()
-@CustomRepository(Ophthalmologist)
+@EntityRepository(Ophthalmologist)
 export class OphthalmologistRepository extends GenericRepository<Ophthalmologist>{}
 
 

@@ -7,22 +7,20 @@ export class RegisterPrescriptionService {
   async execute(request: ResgisterPrescriptionRequest): Promise<ResgisterPrescriptionResponse>{
 
     try{
-      const searchedPrescription = await this.unitOfWork.presciptionRepository.findById(request.id);
+     const searchedPrescription: Prescription = await this.unitOfWork.presciptionRepository.findOne(request.id);
       if (searchedPrescription == undefined) {
         const newPrescription: Prescription= new Prescription();
         newPrescription.id=request.id;
         newPrescription.date=request.date;
         newPrescription.professional=request.professional;
         newPrescription.description=request.description;
-        var savedPrescription = await this.unitOfWork.complete(
-          async () => await this.unitOfWork.presciptionRepository.create(newPrescription),
-        );
+        const savedPrescription = await this.unitOfWork.presciptionRepository.save(newPrescription);
         if (savedPrescription != undefined ) {
           return new ResgisterPrescriptionResponse(
             'prescription registrada satisfactoriamente'
           );
         }
-      }
+     }
     }catch (e) {
       console.log(e);
       return new ResgisterPrescriptionResponse(
@@ -31,14 +29,13 @@ export class RegisterPrescriptionService {
     }
 
   }
-}
 
+}
 export class ResgisterPrescriptionRequest {
-  constructor(
-    public id: string,
-  public date: Date,
-  public professional: string,
-  public description: string
+  constructor(public id: string,
+              public date: Date,
+              public professional: string,
+              public description: string
   ) {}
 }
 export class ResgisterPrescriptionResponse {

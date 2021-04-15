@@ -7,7 +7,7 @@ export class RegisterDiaryService{
   async execute(request: ResgisterDiaryRequest): Promise<ResgiterDiaryResponse>{
 
     try{
-      const searchedDiary = await this.unitOfWork.diaryRepository.findById(request.id);
+      const searchedDiary: Diary = await this.unitOfWork.diaryRepository.findOne(request.id);
       if (searchedDiary == undefined) {
         const newDiary: Diary= new Diary();
         newDiary.id=request.id;
@@ -15,9 +15,7 @@ export class RegisterDiaryService{
         newDiary.nameOphtalmologist=request.nameOphtalmologist;
         newDiary.status=request.status;
         newDiary.clinicalOrder=request.clinicalOrder;
-        var savedDiary = await this.unitOfWork.complete(
-          async () => await this.unitOfWork.diaryRepository.create(newDiary),
-        );
+        const savedDiary = await this.unitOfWork.diaryRepository.save(newDiary);
         if (savedDiary != undefined ) {
           return new ResgiterDiaryResponse(
             'agenda registrada satisfactoriamente'

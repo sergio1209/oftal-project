@@ -1,5 +1,4 @@
 import { IUnitOfWork } from "../infrastructure/contracts/i.unit.of.work";
-import { Ophthalmologist } from "../domain/entity/ophthalmologist";
 import { ClinicHistory } from "../domain/entity/clinic.history";
 
 export class RegisterClinicHistoryService{
@@ -8,7 +7,7 @@ export class RegisterClinicHistoryService{
   async execute(request: RegisterClinicHistoryRequest): Promise<RegisterClinicHistorytResponse>{
 
     try{
-      const searchedClinicHistory = await this.unitOfWork.clinicHistoryRepository.findById(request.id);
+      const searchedClinicHistory: ClinicHistory = await this.unitOfWork.clinicHistoryRepository.findOne(request.id);
       if (searchedClinicHistory == undefined) {
         const newClinicHistory: ClinicHistory= new ClinicHistory();
         newClinicHistory.id=request.id;
@@ -22,9 +21,7 @@ export class RegisterClinicHistoryService{
         newClinicHistory.weight=request.weight;
         newClinicHistory.pulse=request.pulse;
         newClinicHistory.reasonConsultation=request.reasonConsultation;
-        var savedClinicHistory = await this.unitOfWork.complete(
-          async () => await this.unitOfWork.clinicHistoryRepository.create(newClinicHistory),
-        );
+        const savedClinicHistory = await this.unitOfWork.clinicHistoryRepository.save(newClinicHistory);
         if (savedClinicHistory != undefined ) {
           return new RegisterClinicHistorytResponse(
             'historia clinica registrada satisfactoriamente'
@@ -57,8 +54,5 @@ export class RegisterClinicHistoryRequest {
   ) {}
 }
 export class RegisterClinicHistorytResponse {
-  constructor(
-    public readonly message: string,
-
-  ) {}
+  constructor(public readonly message: string) {}
 }

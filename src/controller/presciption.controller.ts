@@ -1,6 +1,5 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
-import { RegisterPatientRequest, RegisterPatientService } from "../application/register.patient.service";
 import {
   ResgisterPrescriptionRequest,
   RegisterPrescriptionService

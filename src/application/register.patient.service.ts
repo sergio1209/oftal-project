@@ -7,7 +7,7 @@ export class RegisterPatientService{
   async execute(request: RegisterPatientRequest): Promise<RegisterPatientResponse>{
 
     try{
-      const searchedPatient = await this.unitOfWork.patientRepository.findById(request.id);
+      const searchedPatient: Patient = await this.unitOfWork.patientRepository.findOne(request.id);
       if (searchedPatient == undefined) {
         const newPatient: Patient= new Patient();
         newPatient.id=request.id;
@@ -27,10 +27,8 @@ export class RegisterPatientService{
         newPatient.licenseNumber=request.licenseNumber;
         newPatient.EPS=request.EPS;
         newPatient.TypeUser=request.TypeUser;
+        const savedPatient = await this.unitOfWork.patientRepository.save(newPatient);
 
-        var savedPatient = await this.unitOfWork.complete(
-          async () => await this.unitOfWork.patientRepository.create(newPatient),
-        );
         if (savedPatient != undefined ) {
           return new RegisterPatientResponse(
             'paciente registrado satisfactoriamente'

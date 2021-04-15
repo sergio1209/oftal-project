@@ -5,7 +5,7 @@ import {
   RegisterClinicHistoryService
 } from "../application/register.clinic.history.service";
 
-@Controller('Clinic_History')
+@Controller('clinic_History')
 export class ClinicHistoryController{
 
   constructor(private readonly _unitOfWork: UnitOfWork) {}

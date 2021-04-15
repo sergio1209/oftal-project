@@ -6,7 +6,6 @@ import {
   PresciptionProviders
 } from "./migrations/entities.provider";
 import { Module } from "@nestjs/common";
-import { PatientRepository } from "../repositories/patient.repository";
 
 @Module(
   {

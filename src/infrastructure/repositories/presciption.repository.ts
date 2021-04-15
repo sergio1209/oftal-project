@@ -1,9 +1,8 @@
 import { GenericRepository } from "../base/generic.repository";
-import { Patient } from "../../domain/entity/patient";
 import { Prescription } from "../../domain/entity/prescription";
 import { Injectable } from "@nestjs/common";
-import { CustomRepository } from "fireorm";
+import { EntityRepository } from "typeorm";
 
 @Injectable()
-@CustomRepository(Prescription)
+@EntityRepository(Prescription)
 export class PresciptionRepository extends GenericRepository<Prescription>{}

@@ -12,6 +12,6 @@ export interface IUnitOfWork{
   clinicHistoryRepository: ClinicHistoryRepository;
   presciptionRepository: PresciptionRepository;
   diaryRepository: DiaryRepository;
-   complete(work: () => any): Promise<any>;
+
 
 }
