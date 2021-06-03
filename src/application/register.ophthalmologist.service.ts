@@ -7,7 +7,7 @@ export class RegisterOphthalmologistService{
   async execute(request: RegisterOphthalmologistRequest): Promise<RegisterOphthalmologistResponse>{
 
     try{
-      const searchedOphthalmologist: Ophthalmologist = await this.unitOfWork.ophthalmologistRepository.findOne(request.id);
+      const searchedOphthalmologist: Ophthalmologist = await this.unitOfWork.ophthalmologistRepository.findOne({where: {id: request.id}});
      if (searchedOphthalmologist == undefined) {
         const newOphthalmologist: Ophthalmologist= new Ophthalmologist();
         newOphthalmologist.id=request.id;

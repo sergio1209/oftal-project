@@ -7,7 +7,7 @@ export class RegisterDiaryService{
   async execute(request: ResgisterDiaryRequest): Promise<ResgiterDiaryResponse>{
 
     try{
-      const searchedDiary: Diary = await this.unitOfWork.diaryRepository.findOne(request.id);
+      const searchedDiary: Diary = await this.unitOfWork.diaryRepository.findOne({where: {id: request.id}});
       if (searchedDiary == undefined) {
         const newDiary: Diary= new Diary();
         newDiary.id=request.id;

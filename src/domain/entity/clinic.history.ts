@@ -1,7 +1,7 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 
 @Entity('Clinic_Historys')
-export class ClinicHistory{
+export class ClinicHistory {
   @ObjectIdColumn()
   public _id: ObjectID;
   @Column()

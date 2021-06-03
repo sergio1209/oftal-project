@@ -7,7 +7,7 @@ export class RegisterClinicHistoryService{
   async execute(request: RegisterClinicHistoryRequest): Promise<RegisterClinicHistorytResponse>{
 
     try{
-      const searchedClinicHistory: ClinicHistory = await this.unitOfWork.clinicHistoryRepository.findOne(request.id);
+      const searchedClinicHistory: ClinicHistory = await this.unitOfWork.clinicHistoryRepository.findOne({where: {id: request.id}});
       if (searchedClinicHistory == undefined) {
         const newClinicHistory: ClinicHistory= new ClinicHistory();
         newClinicHistory.id=request.id;

@@ -11,6 +11,8 @@ import { PresciptionRepository } from "../../repositories/presciption.repository
 import { Diary } from "../../../domain/entity/diary";
 import { DiaryRepository } from "../../repositories/diary.repository";
 import { Connection } from "typeorm";
+import { Appointment } from "../../../domain/entity/appointment";
+import { AppointmentRepository } from "../../repositories/appointment.repository";
 
 export const ophthalmologistProviders = [
   {
@@ -45,6 +47,14 @@ export const DiaryProviders = [
   {
     provide: 'DIARY_REPOSITORY',
     useFactory: (connection: Connection) => connection.getRepository(Diary) as DiaryRepository,
+    inject: ['DATABASE_CONNECTION'],
+  },
+];
+
+export const AppointmentProviders = [
+  {
+    provide: 'Appointment_REPOSITORY',
+    useFactory: (connection: Connection) => connection.getRepository(Appointment) as AppointmentRepository,
     inject: ['DATABASE_CONNECTION'],
   },
 ];

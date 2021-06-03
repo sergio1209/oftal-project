@@ -1,5 +1,6 @@
 import { databaseProviders } from "./provider/database.provider";
 import {
+  AppointmentProviders,
   clinicHistoryProviders, DiaryProviders,
   ophthalmologistProviders,
   patientProviders,
@@ -15,7 +16,8 @@ import { Module } from "@nestjs/common";
       ...patientProviders,
       ...clinicHistoryProviders,
       ...PresciptionProviders,
-      ...DiaryProviders
+      ...DiaryProviders,
+      ...AppointmentProviders
     ],
     exports: [
       ...databaseProviders,
@@ -23,7 +25,8 @@ import { Module } from "@nestjs/common";
       ...patientProviders,
       ...clinicHistoryProviders,
       ...PresciptionProviders,
-      ...DiaryProviders
+      ...DiaryProviders,
+      ...AppointmentProviders
     ]
   }
 )

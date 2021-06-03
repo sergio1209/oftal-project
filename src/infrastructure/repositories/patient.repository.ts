@@ -5,4 +5,8 @@ import { EntityRepository } from "typeorm";
 
 @Injectable()
 @EntityRepository(Patient)
-export class PatientRepository extends GenericRepository<Patient>{}
+export class PatientRepository extends GenericRepository<Patient>{
+
+
+
+}

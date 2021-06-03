@@ -7,10 +7,10 @@ export class RegisterPatientService{
   async execute(request: RegisterPatientRequest): Promise<RegisterPatientResponse>{
 
     try{
-      const searchedPatient: Patient = await this.unitOfWork.patientRepository.findOne(request.id);
-      if (searchedPatient == undefined) {
+      const searchedPatient: Patient = await this.unitOfWork.patientRepository.findOne({where: {identification: request.identification}});
+      if (searchedPatient==undefined ) {
         const newPatient: Patient= new Patient();
-        newPatient.id=request.id;
+        newPatient.identification=request.identification;
         newPatient.names=request.names;
         newPatient.surnames=request.surnames;
         newPatient.DateofBirth=request.DateofBirth;
@@ -47,7 +47,7 @@ export class RegisterPatientService{
 
 export class RegisterPatientRequest {
   constructor(
-    public id: string,
+    public identification: string,
   public names: string,
   public surnames: string,
   public address: string,

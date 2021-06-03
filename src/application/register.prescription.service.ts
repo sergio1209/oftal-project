@@ -7,7 +7,7 @@ export class RegisterPrescriptionService {
   async execute(request: ResgisterPrescriptionRequest): Promise<ResgisterPrescriptionResponse>{
 
     try{
-     const searchedPrescription: Prescription = await this.unitOfWork.presciptionRepository.findOne(request.id);
+     const searchedPrescription: Prescription = await this.unitOfWork.presciptionRepository.findOne({where: {id: request.id}});
       if (searchedPrescription == undefined) {
         const newPrescription: Prescription= new Prescription();
         newPrescription.id=request.id;
