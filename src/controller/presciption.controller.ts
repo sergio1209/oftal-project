@@ -3,7 +3,7 @@ import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import {
   ResgisterPrescriptionRequest,
   RegisterPrescriptionService
-} from "../application/registers/register.prescription.service";
+} from "../application/registers/register-prescription.service";
 import { QueryOphthalmologistService } from "../application/querys/query-ophthalmologist.service";
 import { QueryPresciptionService } from "../application/querys/query-presciption.service";
 

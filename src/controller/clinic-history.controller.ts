@@ -3,7 +3,7 @@ import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import {
   RegisterClinicHistoryRequest,
   RegisterClinicHistoryService
-} from "../application/registers/register.clinic.history.service";
+} from "../application/registers/register-clinic-history.service";
 import { QueryAppointmentService } from "../application/querys/query-appointment.service";
 import { QueryClinicHistoryService } from "../application/querys/query-clinic-history.service";
 

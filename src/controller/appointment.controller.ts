@@ -1,4 +1,4 @@
-import { RegisterAppointmentRequest, RegisterAppointmentService } from "../application/registers/register.appointment.service";
+import { RegisterAppointmentRequest, RegisterAppointmentService } from "../application/registers/register-appointment.service";
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import { QueryAppointmentService } from "../application/querys/query-appointment.service";

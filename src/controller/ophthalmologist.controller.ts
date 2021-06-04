@@ -3,7 +3,7 @@ import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import {
   RegisterOphthalmologistRequest,
   RegisterOphthalmologistService
-} from "../application/registers/register.ophthalmologist.service";
+} from "../application/registers/register-ophthalmologist.service";
 import { QueryDiaryService } from "../application/querys/query-diary.service";
 import { QueryOphthalmologistService } from "../application/querys/query-ophthalmologist.service";
 

@@ -3,8 +3,8 @@ import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import {
   ResgisterDiaryRequest,
 
-} from "../application/registers/register.diary.service";
-import { RegisterDiaryService } from "../application/registers/register.diary.service";
+} from "../application/registers/register-diary.service";
+import { RegisterDiaryService } from "../application/registers/register-diary.service";
 import { QueryClinicHistoryService } from "../application/querys/query-clinic-history.service";
 import { QueryDiaryService } from "../application/querys/query-diary.service";
 
