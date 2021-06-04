@@ -1,5 +1,5 @@
-import { IUnitOfWork } from "../infrastructure/contracts/i.unit.of.work";
-import { Diary } from "../domain/entity/diary";
+import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
+import { Diary } from "../../domain/entity/diary";
 
 export class RegisterDiaryService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -7,10 +7,10 @@ export class RegisterDiaryService{
   async execute(request: ResgisterDiaryRequest): Promise<ResgiterDiaryResponse>{
 
     try{
-      const searchedDiary: Diary = await this.unitOfWork.diaryRepository.findOne({where: {id: request.id}});
+      const searchedDiary: Diary = await this.unitOfWork.diaryRepository.findOne({where: {idPatient: request.idPatient}});
       if (searchedDiary == undefined) {
         const newDiary: Diary= new Diary();
-        newDiary.id=request.id;
+        newDiary.idPatient=request.idPatient;
         newDiary.namePatient=request.namePatient;
         newDiary.nameOphtalmologist=request.nameOphtalmologist;
         newDiary.status=request.status;
@@ -34,7 +34,7 @@ export class RegisterDiaryService{
 
 export class ResgisterDiaryRequest {
   constructor(
-    public id: string,
+    public idPatient: string,
   public namePatient:string,
   public nameOphtalmologist:string,
   public status: string,

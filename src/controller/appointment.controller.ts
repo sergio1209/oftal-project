@@ -1,7 +1,7 @@
-import { RegisterAppointmentRequest, RegisterAppointmentService } from "../application/register.appointment.service";
+import { RegisterAppointmentRequest, RegisterAppointmentService } from "../application/registers/register.appointment.service";
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
-import { QueryAppointmentService } from "../application/consult.appointment.service";
+import { QueryAppointmentService } from "../application/querys/query-appointment.service";
 
 
 @Controller('Appointment')
@@ -16,7 +16,7 @@ export class AppointmentController{
   }
 
   @Get(':id')
-  async queryAppointmentPAtient(@Param('id') cedula: string ){
+  async queryAppointmentPatient(@Param('id') cedula: string ){
     const service: QueryAppointmentService = new QueryAppointmentService(this._unitOfWork);
     return await service.execute(cedula);
   }

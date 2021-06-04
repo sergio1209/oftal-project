@@ -5,7 +5,7 @@ import { OphthalmologistRepository } from "../../repositories/ophthalmologist.re
 import { PatientRepository } from "../../repositories/patient.repository";
 import { Patient } from "../../../domain/entity/patient";
 import { ClinicHistoryRepository } from "../../repositories/clinic.history.repository";
-import { ClinicHistory } from "../../../domain/entity/clinic.history";
+import { ClinicHistory } from "../../../domain/entity/clinic-history";
 import { Prescription } from "../../../domain/entity/prescription";
 import { PresciptionRepository } from "../../repositories/presciption.repository";
 import { Diary } from "../../../domain/entity/diary";

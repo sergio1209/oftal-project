@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { GenericRepository } from "../base/generic.repository";
-import { ClinicHistory } from "../../domain/entity/clinic.history";
+import { ClinicHistory } from "../../domain/entity/clinic-history";
 import { EntityRepository } from "typeorm";
 
 @Injectable()

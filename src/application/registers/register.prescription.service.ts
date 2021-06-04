@@ -1,5 +1,5 @@
-import { IUnitOfWork } from "../infrastructure/contracts/i.unit.of.work";
-import { Prescription } from "../domain/entity/prescription";
+import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
+import { Prescription } from "../../domain/entity/prescription";
 
 export class RegisterPrescriptionService {
   constructor(private readonly unitOfWork: IUnitOfWork) {}

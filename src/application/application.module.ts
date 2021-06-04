@@ -1,10 +1,15 @@
-import { RegisterOphthalmologistService } from "./register.ophthalmologist.service";
+import { RegisterOphthalmologistService } from "./registers/register.ophthalmologist.service";
 import { Module } from "@nestjs/common";
-import { RegisterClinicHistoryService } from "./register.clinic.history.service";
-import { RegisterPatientService } from "./register.patient.service";
-import { RegisterPrescriptionService } from "./register.prescription.service";
-import { RegisterAppointmentService } from "./register.appointment.service";
-import { QueryAppointmentService } from "./consult.appointment.service";
+import { RegisterClinicHistoryService } from "./registers/register.clinic.history.service";
+import { RegisterPatientService } from "./registers/register.patient.service";
+import { RegisterPrescriptionService } from "./registers/register.prescription.service";
+import { RegisterAppointmentService } from "./registers/register.appointment.service";
+import { QueryAppointmentService } from "./querys/query-appointment.service";
+import { QueryClinicHistoryService } from "./querys/query-clinic-history.service";
+import { QueryDiaryService } from "./querys/query-diary.service";
+import { QueryOphthalmologistService } from "./querys/query-ophthalmologist.service";
+import { QueryPatientService } from "./querys/query-patient.service";
+import { QueryPresciptionService } from "./querys/query-presciption.service";
 
 @Module({
   imports: [
@@ -13,7 +18,12 @@ import { QueryAppointmentService } from "./consult.appointment.service";
     RegisterPatientService,
     RegisterPrescriptionService,
     RegisterAppointmentService,
-    QueryAppointmentService
+    QueryAppointmentService,
+    QueryClinicHistoryService,
+    QueryDiaryService,
+    QueryOphthalmologistService,
+    QueryPatientService,
+    QueryPresciptionService
 
   ],
   exports: [
@@ -22,7 +32,12 @@ import { QueryAppointmentService } from "./consult.appointment.service";
     RegisterPatientService,
     RegisterPrescriptionService,
     RegisterAppointmentService,
-    QueryAppointmentService
+    QueryAppointmentService,
+    QueryClinicHistoryService,
+    QueryDiaryService,
+    QueryOphthalmologistService,
+    QueryPatientService,
+    QueryPresciptionService
   ]
 })
 export class ApplicationModule{}

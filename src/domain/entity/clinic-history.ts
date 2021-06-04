@@ -5,7 +5,7 @@ export class ClinicHistory {
   @ObjectIdColumn()
   public _id: ObjectID;
   @Column()
-  public id: string;
+  public idPatient: string;
   @Column()
   public date: Date;
   @Column()

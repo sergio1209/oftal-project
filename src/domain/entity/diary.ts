@@ -5,7 +5,7 @@ export class Diary{
   @ObjectIdColumn()
   public _id: ObjectID;
   @Column()
-  public id: string;
+  public idPatient: string;
   @Column()
   public namePatient:string;
   @Column()

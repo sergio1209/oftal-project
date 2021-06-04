@@ -1,5 +1,5 @@
-import { IUnitOfWork } from "../infrastructure/contracts/i.unit.of.work";
-import { Ophthalmologist } from "../domain/entity/ophthalmologist";
+import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
+import { Ophthalmologist } from "../../domain/entity/ophthalmologist";
 
 export class RegisterOphthalmologistService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
