@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import { RegisterPatientRequest, RegisterPatientService } from "../application/registers/register-patient.service";
 import { QueryOphthalmologistService } from "../application/querys/query-ophthalmologist.service";
 import { QueryPatientService } from "../application/querys/query-patient.service";
+import { UpdatePatientService } from "../application/updates/update-patient.service";
 
 @Controller('patient')
 export class PatientController{
@@ -18,5 +19,10 @@ export class PatientController{
   async queryPatientService(@Param('id') cedula: string ){
     const service: QueryPatientService = new QueryPatientService(this._unitOfWork);
     return await service.execute(cedula);
+  }
+  @Put(':idAnterior')
+  async updatePatient(@Body() request: RegisterPatientRequest, @Param('idAnterior')idAnterior: number){
+    const service: UpdatePatientService = new UpdatePatientService(this._unitOfWork);
+    return await service.execute(request,idAnterior);
   }
 }

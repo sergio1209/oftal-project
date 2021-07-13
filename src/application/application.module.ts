@@ -10,6 +10,11 @@ import { QueryDiaryService } from "./querys/query-diary.service";
 import { QueryOphthalmologistService } from "./querys/query-ophthalmologist.service";
 import { QueryPatientService } from "./querys/query-patient.service";
 import { QueryPresciptionService } from "./querys/query-presciption.service";
+import { UpdatePatientService } from "./updates/update-patient.service";
+import { UpdateAppointmentService } from "./updates/update-appoiment.service";
+import { UpdateDiaryService } from "./updates/update-diary.service";
+import { UpdateOphthalmologistService } from "./updates/update-ophthalmologist.service";
+import { UpdatePrescriptionService } from "./updates/update-prescription.service";
 
 @Module({
   imports: [
@@ -23,7 +28,12 @@ import { QueryPresciptionService } from "./querys/query-presciption.service";
     QueryDiaryService,
     QueryOphthalmologistService,
     QueryPatientService,
-    QueryPresciptionService
+    QueryPresciptionService,
+    UpdatePatientService,
+    UpdateAppointmentService,
+    UpdateDiaryService,
+    UpdateOphthalmologistService,
+    UpdatePrescriptionService
 
   ],
   exports: [
@@ -37,7 +47,12 @@ import { QueryPresciptionService } from "./querys/query-presciption.service";
     QueryDiaryService,
     QueryOphthalmologistService,
     QueryPatientService,
-    QueryPresciptionService
+    QueryPresciptionService,
+    UpdatePatientService,
+    UpdateAppointmentService,
+    UpdateDiaryService,
+    UpdateOphthalmologistService,
+    UpdatePrescriptionService
   ]
 })
 export class ApplicationModule{}
