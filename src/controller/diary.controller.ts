@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Headers, HttpException, HttpStatus, Param, Post, Put } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import {
   ResgisterDiaryRequest,
@@ -10,6 +10,7 @@ import { QueryDiaryService } from "../application/querys/query-diary.service";
 import { RegisterPatientRequest } from "../application/registers/register-patient.service";
 import { UpdatePatientService } from "../application/updates/update-patient.service";
 import { UpdateDiaryService } from "../application/updates/update-diary.service";
+import { AuthUsersService } from "src/application/security/auth-users.service";
 
 @Controller('diary')
 export class DiaryController {
@@ -17,19 +18,40 @@ export class DiaryController {
   constructor(private readonly _unitOfWork: UnitOfWork) {}
 
   @Post()
-  async registerDiary(@Body() request: ResgisterDiaryRequest){
-    const service: RegisterDiaryService = new RegisterDiaryService(this._unitOfWork);
+  async registerDiary(@Body() request: ResgisterDiaryRequest,@Headers('authorization') token:string){
+    const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);
+    if(verifytoken.verifyToken(token)){
+      const service: RegisterDiaryService = new RegisterDiaryService(this._unitOfWork);
     return await service.execute(request);
+    }else{
+     throw new HttpException('Error: no se encontró el usuario', HttpStatus.FORBIDDEN);
+    
+    }
+   
   }
 
   @Get(':id')
-  async queryDiaryService(@Param('id') cedula: string ){
-    const service: QueryDiaryService = new QueryDiaryService(this._unitOfWork);
-    return await service.execute(cedula);
+  async queryDiaryService(@Param('id') cedula: string,@Headers('authorization') token:string ){
+    const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);
+    if(verifytoken.verifyToken(token)){
+      const service: QueryDiaryService = new QueryDiaryService(this._unitOfWork);
+      return await service.execute(cedula);
+    }else{
+     throw new HttpException('Error: no se encontró el usuario', HttpStatus.FORBIDDEN);
+    
+    }
+    
   }
   @Put()
-  async updateDiary(@Body() request: ResgisterDiaryRequest){
-    const service: UpdateDiaryService = new UpdateDiaryService(this._unitOfWork);
-    return await service.execute(request);
+  async updateDiary(@Body() request: ResgisterDiaryRequest,@Headers('authorization') token:string){
+    const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);
+    if(verifytoken.verifyToken(token)){
+      const service: UpdateDiaryService = new UpdateDiaryService(this._unitOfWork);
+      return await service.execute(request);
+    }else{
+     throw new HttpException('Error: no se encontró el usuario', HttpStatus.FORBIDDEN);
+    
+    }
+    
   }
 }

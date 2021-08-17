@@ -1,5 +1,6 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Ophthalmologist } from "../../domain/entity/ophthalmologist";
+import { IsInt, IsString } from "class-validator";
 
 export class RegisterOphthalmologistService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -37,17 +38,24 @@ export class RegisterOphthalmologistService{
 }
 
 export class RegisterOphthalmologistRequest{
-  constructor(
-    public id: string,
-  public names: string,
-  public surnames: string,
-  public specialty: string,
-  public gender: string,
-  public phone: number,
-  public cellPhone:number,
-  public address:string,
-  public age: string,
-  ) {}
+  @IsInt()
+  public id: number;
+  @IsString()
+  public names: string;
+  @IsString()
+  public surnames: string;
+  @IsString()
+  public specialty: string;
+  @IsString()
+  public gender: string;
+  @IsInt()
+  public phone: number;
+  @IsInt()
+  public cellPhone:number;
+  @IsString()
+  public address:string;
+  @IsString()
+  public age: string;
 }
 export class RegisterOphthalmologistResponse{
   constructor(

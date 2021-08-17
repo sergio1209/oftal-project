@@ -5,6 +5,7 @@ import { Diary } from "../../domain/entity/diary";
 import { Ophthalmologist } from "../../domain/entity/ophthalmologist";
 import { Patient } from "../../domain/entity/patient";
 import { Prescription } from "../../domain/entity/prescription";
+import { Users } from "../../domain/entity/users";
 
 export class MessageAppoiment implements MessageGenericInterface<Appointment>{}
 
@@ -17,3 +18,5 @@ export class MessageOphthalmologist implements MessageGenericInterface<Ophthalmo
 export class MessagePatient implements MessageGenericInterface<Patient>{}
 
 export class MessagePrescription implements MessageGenericInterface<Prescription>{}
+
+export class MessageUsers implements MessageGenericInterface<Users>{}

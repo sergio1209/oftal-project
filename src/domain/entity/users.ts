@@ -1,15 +1,16 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
-
-@Entity('Prescriptions')
-export class Prescription{
+@Entity('users')
+export class Users{
   @ObjectIdColumn()
   public _id: ObjectID;
   @Column()
-  public id: number;
+  username:string;
   @Column()
-  public date: Date;
+  password: string;
   @Column()
-  public professional: string;
+  rol:string;
   @Column()
-  public description: string;
+  name:string;
+  @Column()
+  surname:string;
 }

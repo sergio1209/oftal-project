@@ -5,7 +5,7 @@ export class Ophthalmologist{
   @ObjectIdColumn()
   public _id: ObjectID;
   @Column()
-  public id: string;
+  public id: number;
   @Column()
   public names: string;
   @Column()

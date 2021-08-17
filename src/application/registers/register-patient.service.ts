@@ -1,6 +1,6 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Patient } from "../../domain/entity/patient";
-
+import { IsDate, IsInt, IsNumber, IsPhoneNumber, IsString } from "class-validator";
 export class RegisterPatientService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
 
@@ -45,26 +45,43 @@ export class RegisterPatientService{
   }
 }
 
+
+
 export class RegisterPatientRequest {
-  constructor(
-    public identification: string,
-  public names: string,
-  public surnames: string,
-  public address: string,
-  public DateofBirth: Date,
-  public neighborhood: string,
-  public phone: number,
-  public cellPhone: number,
-  public mail: string,
-  public guardian: string,
-  public relationship: string,
-  public cellPhoneGuardian: number,
-  public addressGuardian: string,
-  public agreement: string,
-  public licenseNumber: number,
-  public EPS: string,
-  public TypeUser: string
-  ) {}
+  @IsInt()
+  public identification: number;
+  @IsString()
+  public names: string;
+  @IsString()
+  public surnames: string;
+  @IsString()
+  public address: string;
+  @IsDate()
+  public DateofBirth: Date;
+  @IsString()
+  public neighborhood: string;
+  @IsInt()
+  public phone: number;
+@IsInt()
+  public cellPhone: number;
+  @IsString()
+  public mail: string;
+  @IsString()
+  public guardian: string;
+  @IsString()
+  public relationship: string;
+  @IsInt()
+  public cellPhoneGuardian: number;
+  @IsString()
+  public addressGuardian: string;
+  @IsString()
+  public agreement: string;
+  @IsInt()
+  public licenseNumber: number;
+  @IsString()
+  public EPS: string;
+  @IsString()
+  public TypeUser: string;
 }
 export class RegisterPatientResponse {
   constructor(

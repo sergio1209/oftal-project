@@ -15,25 +15,37 @@ import { UpdateAppointmentService } from "./updates/update-appoiment.service";
 import { UpdateDiaryService } from "./updates/update-diary.service";
 import { UpdateOphthalmologistService } from "./updates/update-ophthalmologist.service";
 import { UpdatePrescriptionService } from "./updates/update-prescription.service";
+import { UpdateClinicHistoryService } from "./updates/update-clinic-history.service";
+import { RegisterUsersService } from "./registers/register-users.service";
+import { QueryUsersService } from "./querys/query-users.service";
+import { AuthUsersService } from "./security/auth-users.service";
+import { JwtModule } from "@nestjs/jwt";
+import { jwtConstants } from "./security/constants";
 
 @Module({
   imports: [
+    JwtModule.register({secret: jwtConstants.secret}),
     RegisterOphthalmologistService,
     RegisterClinicHistoryService,
     RegisterPatientService,
     RegisterPrescriptionService,
     RegisterAppointmentService,
+    RegisterUsersService,
     QueryAppointmentService,
     QueryClinicHistoryService,
     QueryDiaryService,
     QueryOphthalmologistService,
     QueryPatientService,
     QueryPresciptionService,
+    QueryUsersService,
     UpdatePatientService,
     UpdateAppointmentService,
     UpdateDiaryService,
     UpdateOphthalmologistService,
-    UpdatePrescriptionService
+    UpdatePrescriptionService,
+    UpdateClinicHistoryService,
+    AuthUsersService
+
 
   ],
   exports: [
@@ -42,17 +54,22 @@ import { UpdatePrescriptionService } from "./updates/update-prescription.service
     RegisterPatientService,
     RegisterPrescriptionService,
     RegisterAppointmentService,
+    RegisterUsersService,
     QueryAppointmentService,
     QueryClinicHistoryService,
     QueryDiaryService,
     QueryOphthalmologistService,
     QueryPatientService,
     QueryPresciptionService,
+    QueryUsersService,
     UpdatePatientService,
     UpdateAppointmentService,
     UpdateDiaryService,
     UpdateOphthalmologistService,
-    UpdatePrescriptionService
-  ]
+    UpdatePrescriptionService,
+    UpdateClinicHistoryService,
+    AuthUsersService
+  ],
+
 })
 export class ApplicationModule{}

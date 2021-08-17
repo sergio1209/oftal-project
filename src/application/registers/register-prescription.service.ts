@@ -1,5 +1,7 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Prescription } from "../../domain/entity/prescription";
+import { IsDateString, IsInt, IsString } from "class-validator";
+import { IsIdentityCard } from "class-validator";
 
 export class RegisterPrescriptionService {
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -32,11 +34,14 @@ export class RegisterPrescriptionService {
 
 }
 export class ResgisterPrescriptionRequest {
-  constructor(public id: string,
-              public date: Date,
-              public professional: string,
-              public description: string
-  ) {}
+  @IsInt()
+  public id: number;
+  @IsDateString()
+  public date: Date;
+  @IsString()
+  public professional: string;
+  @IsString()
+  public description: string;
 }
 export class ResgisterPrescriptionResponse {
   constructor(

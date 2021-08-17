@@ -1,11 +1,12 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
+import { IsDate, IsNumber, IsString } from "class-validator";
 
 @Entity('Clinic_Historys')
 export class ClinicHistory {
   @ObjectIdColumn()
   public _id: ObjectID;
-  @Column()
-  public idPatient: string;
+   @Column()
+  public idPatient: number;
   @Column()
   public date: Date;
   @Column()

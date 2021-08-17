@@ -4,6 +4,8 @@ import { ClinicHistoryRepository } from "../repositories/clinic-history.reposito
 import { PresciptionRepository } from "../repositories/presciption.repository";
 import { DiaryRepository } from "../repositories/diary.repository";
 import { AppointmentRepository } from "../repositories/appointment.repository";
+import { UsersRepository } from "../repositories/users.repository";
+import { RolRepository } from "../repositories/rol.repository";
 
 export interface IUnitOfWork{
 
@@ -14,6 +16,7 @@ export interface IUnitOfWork{
   presciptionRepository: PresciptionRepository;
   diaryRepository: DiaryRepository;
   appointmentRepository: AppointmentRepository;
-
+  usersRepository: UsersRepository;
+  rolRepository: RolRepository;
 
 }

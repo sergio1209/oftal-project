@@ -1,5 +1,6 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Diary } from "../../domain/entity/diary";
+import { IsInt, IsString } from "class-validator";
 
 export class RegisterDiaryService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -33,13 +34,17 @@ export class RegisterDiaryService{
 }
 
 export class ResgisterDiaryRequest {
-  constructor(
-    public idPatient: string,
-  public namePatient:string,
-  public nameOphtalmologist:string,
-  public status: string,
-  public clinicalOrder:string
-  ) {}
+ @IsInt()
+    public idPatient: number;
+  @IsString()
+  public namePatient:string;
+  @IsString()
+  public nameOphtalmologist:string;
+  @IsString()
+  public status: string;
+  @IsString()
+  public clinicalOrder:string;
+
 }
 export class ResgiterDiaryResponse {
   constructor(

@@ -7,6 +7,7 @@ import { ClinicHistoryController } from "./clinic-history.controller";
 import { PresciptionController } from "./presciption.controller";
 import { DiaryController } from "./diary.controller";
 import { AppointmentController } from "./appointment.controller";
+import { UsersController } from "./users.controller";
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { AppointmentController } from "./appointment.controller";
     ClinicHistoryController,
     PresciptionController,
     DiaryController,
-    AppointmentController
+    AppointmentController,
+    UsersController
 
   ]
 })

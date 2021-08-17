@@ -1,6 +1,7 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Appointment } from "../../domain/entity/appointment";
 import { UnitOfWork } from "../../infrastructure/base/unit.of.work";
+import { IsDate, IsInt, IsString } from "class-validator";
 
 export class RegisterAppointmentService {
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -38,15 +39,21 @@ export class RegisterAppointmentService {
 }
 
 export class RegisterAppointmentRequest {
-  constructor(
-    public idPatient: string,
-  public dateAppointment: Date,
-  public date: Date,
-  public hours: string,
-  public performAppointment: string,
-  public duration: string,
-  public status: string,
-  ) {}
+ @IsInt()
+    public idPatient: number;
+ @IsDate()
+  public dateAppointment: Date;
+ @IsDate()
+  public date: Date;
+ @IsString()
+  public hours: string;
+  @IsString()
+  public performAppointment: string;
+  @IsString()
+  public duration: string;
+  @IsString()
+  public status: string;
+
 }
 export class RegisterAppointmentResponse {
   constructor(public readonly message: string) {}

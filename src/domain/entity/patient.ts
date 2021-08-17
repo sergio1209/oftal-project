@@ -1,11 +1,12 @@
-import { Column, Entity, ObjectID, ObjectIdColumn, PrimaryColumn } from "typeorm";
+import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
+
 
 @Entity('Patients')
 export class Patient{
   @ObjectIdColumn()
   public _id: ObjectID;
   @Column()
-  public identification: string;
+  public identification: number;
   @Column()
   public names: string;
   @Column()

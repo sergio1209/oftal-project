@@ -7,6 +7,8 @@ import { PresciptionRepository } from "../repositories/presciption.repository";
 import { DiaryRepository } from "../repositories/diary.repository";
 import { Connection } from "typeorm";
 import { AppointmentRepository } from "../repositories/appointment.repository";
+import { UsersRepository } from "../repositories/users.repository";
+import { RolRepository } from "../repositories/rol.repository";
 
 export class UnitOfWork implements IUnitOfWork{
   public ophthalmologistRepository: OphthalmologistRepository;
@@ -15,6 +17,8 @@ export class UnitOfWork implements IUnitOfWork{
   public  presciptionRepository: PresciptionRepository;
   public diaryRepository: DiaryRepository;
   public appointmentRepository: AppointmentRepository;
+  public usersRepository: UsersRepository;
+  public rolRepository: RolRepository;
   constructor(@Inject('DATABASE_CONNECTION') private readonly asyncDatabaseConnection: Connection ) {
     this.ophthalmologistRepository = this.asyncDatabaseConnection.getCustomRepository(OphthalmologistRepository);
     this.patientRepository = this.asyncDatabaseConnection.getCustomRepository(PatientRepository);
@@ -22,5 +26,7 @@ export class UnitOfWork implements IUnitOfWork{
     this.presciptionRepository = this.asyncDatabaseConnection.getCustomRepository(PresciptionRepository);
     this.diaryRepository = this.asyncDatabaseConnection.getCustomRepository(DiaryRepository);
     this.appointmentRepository= this.asyncDatabaseConnection.getCustomRepository(AppointmentRepository);
+    this.usersRepository= this.asyncDatabaseConnection.getCustomRepository(UsersRepository);
+    this.rolRepository=this.asyncDatabaseConnection.getCustomRepository(RolRepository);
   }
 }

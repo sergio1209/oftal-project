@@ -4,7 +4,7 @@ import {
   clinicHistoryProviders, DiaryProviders,
   ophthalmologistProviders,
   patientProviders,
-  PresciptionProviders
+  PresciptionProviders, RolProviders, UsersProviders
 } from "./migrations/entities.provider";
 import { Module } from "@nestjs/common";
 
@@ -17,7 +17,9 @@ import { Module } from "@nestjs/common";
       ...clinicHistoryProviders,
       ...PresciptionProviders,
       ...DiaryProviders,
-      ...AppointmentProviders
+      ...AppointmentProviders,
+      ...UsersProviders,
+      ...RolProviders
     ],
     exports: [
       ...databaseProviders,
@@ -26,7 +28,9 @@ import { Module } from "@nestjs/common";
       ...clinicHistoryProviders,
       ...PresciptionProviders,
       ...DiaryProviders,
-      ...AppointmentProviders
+      ...AppointmentProviders,
+      ...UsersProviders,
+      ...RolProviders
     ]
   }
 )
