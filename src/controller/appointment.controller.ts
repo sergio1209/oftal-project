@@ -2,9 +2,6 @@ import { RegisterAppointmentRequest, RegisterAppointmentService } from "../appli
 import { Body, Controller, Get, Headers, HttpException, HttpStatus, Param, Post, Put } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import { QueryAppointmentService } from "../application/querys/query-appointment.service";
-import { UpdatePatientService } from "../application/updates/update-patient.service";
-import { ResgisterDiaryRequest } from "../application/registers/register-diary.service";
-import { UpdateDiaryService } from "../application/updates/update-diary.service";
 import { UpdateAppointmentService } from "../application/updates/update-appoiment.service";
 import { AuthUsersService } from "src/application/security/auth-users.service";
 
