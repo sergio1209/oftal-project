@@ -15,7 +15,7 @@
     "start": "node dist/main",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "postinstall": "npm run prestart:prod",
+    "postinstall": "node dist/main",
     "prestart:prod": "npm install",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
