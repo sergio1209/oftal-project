@@ -25,11 +25,12 @@ export class AuthUsersService{
 
   async login(user: any) {
     console.log(user);
-    const payload = { username: user.username, rol: user.rol };
+    const payload = { username: user.username, rol: user.rol , idUSer: user._id};
     let jwtService= new JwtService({secret:jwtConstants.secret});
+   let token= jwtService.sign(payload);
     return {
-    
-      access_token: jwtService.sign(payload),
+      infoUser:  await this.InfoUserToken(token),
+      access_token: token,
       name: user.name, surname:user.surname
     };
   }
@@ -46,5 +47,25 @@ async verifyToken(token:string){
   return false;
 }
 
+async InfoUserToken(token: string){
+    try {
+      let jwtService= new JwtService({secret:jwtConstants.secret});
+      var decoded = jwtService.verify(token,{secret:jwtConstants.secret});
+      if (decoded && decoded.rol){
+      return this.decodeRolToRepo(decoded.rol, decoded.idUSer);
+      }else{
+        return null;
+      }
+    }catch (e){
 
+    }
+
+}
+private decodeRolToRepo(rol: string, id: string){
+ if(rol=="PACIENTE"){
+   return this.Iunitofwork.patientRepository.findOne({select:['identification','names','surnames','address','DateofBirth','neighborhood','phone','cellPhone','mail','guardian','relationship','cellPhoneGuardian','agreement','licenseNumber','EPS','TypeUser'],where:{idUser:id}})
+ }else if(rol=="DOCTOR"){
+   return this.Iunitofwork.ophthalmologistRepository.findOne({select:['id','names','surnames','specialty','gender','phone','cellPhone','address','age'],where:{idUser:id}})
+ }
+}
 }

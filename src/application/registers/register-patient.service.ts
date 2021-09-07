@@ -1,6 +1,11 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Patient } from "../../domain/entity/patient";
-import { IsDate, IsInt, IsNumber, IsPhoneNumber, IsString } from "class-validator";
+import { IsDateString, IsInt, IsNumber, IsPhoneNumber, IsString } from "class-validator";
+import { Users } from "../../domain/entity/users";
+import * as bcrypt from "bcrypt";
+import { ResgisterUsersResponse } from "./register-users.service";
+import { ObjectID } from "typeorm";
+import { throws } from "assert";
 export class RegisterPatientService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
 
@@ -8,6 +13,7 @@ export class RegisterPatientService{
 
     try{
       const searchedPatient: Patient = await this.unitOfWork.patientRepository.findOne({where: {identification: request.identification}});
+     
       if (searchedPatient==undefined ) {
         const newPatient: Patient= new Patient();
         newPatient.identification=request.identification;
@@ -27,19 +33,33 @@ export class RegisterPatientService{
         newPatient.licenseNumber=request.licenseNumber;
         newPatient.EPS=request.EPS;
         newPatient.TypeUser=request.TypeUser;
+        newPatient.Rol= "PACIENTE";
+        const newUser: Users= new Users();
+        let identi= String(request.identification);
+        newUser.username=identi;
+        const salt = await bcrypt.genSalt();
+        newUser.password= await bcrypt.hash(identi, salt);
+        newUser.rol=newPatient.Rol;
+        newUser.name=request.names;
+        newUser.surname=request.surnames;
+        const savedUsers = await this.unitOfWork.usersRepository.save(newUser);
+        let idObjetUser=String(savedUsers._id)
+        newPatient.idUser= idObjetUser;
         const savedPatient = await this.unitOfWork.patientRepository.save(newPatient);
-
         if (savedPatient != undefined ) {
           return new RegisterPatientResponse(
             'paciente registrado satisfactoriamente'
           );
+
         }
-      }
+      } 
+      throw new Error('el paciente ya se encuentra registrado');
     }catch (e) {
-      console.log(e);
+     
       return new RegisterPatientResponse(
-        'Se ha presentado un error al momento de registrar este paciente',
+        e.message
       );
+
     }
 
   }
@@ -56,7 +76,7 @@ export class RegisterPatientRequest {
   public surnames: string;
   @IsString()
   public address: string;
-  @IsDate()
+  @IsDateString()
   public DateofBirth: Date;
   @IsString()
   public neighborhood: string;
@@ -82,6 +102,8 @@ export class RegisterPatientRequest {
   public EPS: string;
   @IsString()
   public TypeUser: string;
+
+
 }
 export class RegisterPatientResponse {
   constructor(

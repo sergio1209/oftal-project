@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, HttpException, HttpStatus, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Headers, HttpException, HttpStatus, Param, Post, Put, Res } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import { RegisterPatientRequest, RegisterPatientService } from "../application/registers/register-patient.service";
 import { QueryOphthalmologistService } from "../application/querys/query-ophthalmologist.service";
@@ -15,16 +15,17 @@ export class PatientController{
   async registerPatient(@Body() request: RegisterPatientRequest,@Headers('authorization') token:string){
     const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);
     if(verifytoken.verifyToken(token)){
-     
+      const service: RegisterPatientService = new RegisterPatientService(this._unitOfWork);
+      return await service.execute(request);
     }else{
      throw new HttpException('Error: no se encontró el usuario', HttpStatus.FORBIDDEN);
     
     }
-    const service: RegisterPatientService = new RegisterPatientService(this._unitOfWork);
-    return await service.execute(request);
+    
   }
   @Get(':id')
   async queryPatientService(@Param('id') cedula: string ,@Headers('authorization') token:string){
+
     const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);
     if(verifytoken.verifyToken(token)){
       const service: QueryPatientService = new QueryPatientService(this._unitOfWork);

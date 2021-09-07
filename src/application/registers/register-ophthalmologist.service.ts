@@ -1,6 +1,8 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Ophthalmologist } from "../../domain/entity/ophthalmologist";
 import { IsInt, IsString } from "class-validator";
+import { Users } from "../../domain/entity/users";
+import * as bcrypt from "bcrypt";
 
 export class RegisterOphthalmologistService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -20,6 +22,17 @@ export class RegisterOphthalmologistService{
         newOphthalmologist.cellPhone=request.cellPhone;
         newOphthalmologist.address=request.address;
         newOphthalmologist.age=request.age;
+        newOphthalmologist.Rol="DOCTOR";
+       const newUser: Users= new Users();
+       let identi= String(request.id);
+       newUser.username=identi;
+       const salt = await bcrypt.genSalt();
+       newUser.password= await bcrypt.hash(identi, salt);
+       newUser.rol=newOphthalmologist.Rol;
+       newUser.name=request.names;
+       newUser.surname=request.surnames;
+       const savedUsers = await this.unitOfWork.usersRepository.save(newUser);
+       newOphthalmologist.idUser= String(savedUsers._id);
        const savedOphthalmologist = await this.unitOfWork.ophthalmologistRepository.save(newOphthalmologist);
         if (savedOphthalmologist != undefined ) {
           return new RegisterOphthalmologistResponse(
@@ -27,10 +40,11 @@ export class RegisterOphthalmologistService{
           );
         }
       }
+      throw new Error('el Doctor ya se encuentra registrado');
     }catch (e) {
-      console.log(e);
+     
       return new RegisterOphthalmologistResponse(
-        'Se ha presentado un error al momento de registrar este oftalmologo',
+        'el Doctor ya se encuentra registrado',
       );
     }
 
@@ -56,6 +70,8 @@ export class RegisterOphthalmologistRequest{
   public address:string;
   @IsString()
   public age: string;
+ 
+ 
 }
 export class RegisterOphthalmologistResponse{
   constructor(

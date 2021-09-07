@@ -1,11 +1,12 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
+import { IsString } from "class-validator";
 
 
 @Entity('Patients')
 export class Patient{
   @ObjectIdColumn()
   public _id: ObjectID;
-  @Column()
+  @Column({unique:true})
   public identification: number;
   @Column()
   public names: string;
@@ -39,4 +40,8 @@ export class Patient{
   public EPS: string;
   @Column()
   public TypeUser: string;
+  @Column()
+  public Rol: string ='paciente';
+  @Column({select:true})
+  public idUser: string;
 }

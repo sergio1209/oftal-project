@@ -4,7 +4,7 @@ import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 export class Ophthalmologist{
   @ObjectIdColumn()
   public _id: ObjectID;
-  @Column()
+  @Column({unique:true})
   public id: number;
   @Column()
   public names: string;
@@ -22,5 +22,8 @@ export class Ophthalmologist{
   public address:string;
   @Column()
   public age: string;
-
+@Column()
+  public Rol: string;
+@Column({select:true})
+  public idUser:string;
 }
