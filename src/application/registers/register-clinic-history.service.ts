@@ -1,6 +1,7 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { ClinicHistory } from "../../domain/entity/clinic-history";
 import { IsDate, IsInt, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class RegisterClinicHistoryService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -70,26 +71,37 @@ export class RegisterClinicHistoryService{
 
 export class RegisterClinicHistoryRequest {
   @IsInt()
+  @ApiProperty()
   public idPatient: number;
   @IsDate()
+  @ApiProperty()
   public date: Date;
   @IsString()
+  @ApiProperty()
   public professional: string;
   @IsString()
+  @ApiProperty()
   public anamnesis: string;
   @IsString()
+  @ApiProperty()
   public bloodPressure: string;
   @IsInt()
+  @ApiProperty()
   public heartRate: number;
   @IsInt()
+  @ApiProperty()
   public respiratoryRate: number;
   @IsInt()
+  @ApiProperty()
   public height: number;
   @IsInt()
+  @ApiProperty()
   public weight:number;
   @IsInt()
+  @ApiProperty()
   public pulse: number;
   @IsString()
+  @ApiProperty()
   public reasonConsultation: string;
 }
 export class RegisterClinicHistorytResponse {

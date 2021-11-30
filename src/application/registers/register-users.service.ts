@@ -3,6 +3,7 @@ import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Users } from "../../domain/entity/users";
 import * as bcrypt from "bcrypt";
 import { AuthUsersService } from "../security/auth-users.service";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class RegisterUsersService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -40,14 +41,19 @@ export class RegisterUsersService{
 export class ResgisterUsersRequest {
 
   @IsString()
+  @ApiProperty()
   username:string;
   @IsString()
+  @ApiProperty()
   password: string;
   @IsString()
+  @ApiProperty()
   rol:string;
   @IsString()
+  @ApiProperty()
   name:string;
   @IsString()
+  @ApiProperty()
   surname:string;
 }
 export class ResgisterUsersResponse {

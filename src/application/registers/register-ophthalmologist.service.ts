@@ -3,6 +3,7 @@ import { Ophthalmologist } from "../../domain/entity/ophthalmologist";
 import { IsInt, IsString } from "class-validator";
 import { Users } from "../../domain/entity/users";
 import * as bcrypt from "bcrypt";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class RegisterOphthalmologistService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -53,22 +54,28 @@ export class RegisterOphthalmologistService{
 
 export class RegisterOphthalmologistRequest{
   @IsInt()
+  @ApiProperty()
   public id: number;
   @IsString()
+  @ApiProperty()
   public names: string;
-  @IsString()
+  @IsString()@ApiProperty()
   public surnames: string;
-  @IsString()
+  @IsString() @ApiProperty()
   public specialty: string;
-  @IsString()
+  @IsString() @ApiProperty()
   public gender: string;
   @IsInt()
+  @ApiProperty()
   public phone: number;
   @IsInt()
+  @ApiProperty()
   public cellPhone:number;
   @IsString()
+  @ApiProperty()
   public address:string;
   @IsString()
+  @ApiProperty()
   public age: string;
  
  

@@ -6,6 +6,7 @@ import * as bcrypt from "bcrypt";
 import { ResgisterUsersResponse } from "./register-users.service";
 import { ObjectID } from "typeorm";
 import { throws } from "assert";
+import { ApiProperty } from "@nestjs/swagger";
 export class RegisterPatientService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
 
@@ -69,38 +70,56 @@ export class RegisterPatientService{
 
 export class RegisterPatientRequest {
   @IsInt()
+  @ApiProperty()
+
   public identification: number;
   @IsString()
+  @ApiProperty()
   public names: string;
   @IsString()
+  @ApiProperty()
   public surnames: string;
   @IsString()
+  @ApiProperty()
   public address: string;
   @IsDateString()
+  @ApiProperty()
   public DateofBirth: Date;
   @IsString()
+  @ApiProperty()
   public neighborhood: string;
   @IsInt()
+  @ApiProperty()
   public phone: number;
 @IsInt()
+@ApiProperty()
   public cellPhone: number;
   @IsString()
+  @ApiProperty()
   public mail: string;
   @IsString()
+  @ApiProperty()
   public guardian: string;
   @IsString()
+  @ApiProperty()
   public relationship: string;
   @IsInt()
+  @ApiProperty()
   public cellPhoneGuardian: number;
   @IsString()
+  @ApiProperty()
   public addressGuardian: string;
   @IsString()
+  @ApiProperty()
   public agreement: string;
   @IsInt()
+  @ApiProperty()
   public licenseNumber: number;
   @IsString()
+  @ApiProperty()
   public EPS: string;
   @IsString()
+  @ApiProperty()
   public TypeUser: string;
 
 

@@ -1,6 +1,7 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Diary } from "../../domain/entity/diary";
 import { IsInt, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class RegisterDiaryService{
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -35,14 +36,19 @@ export class RegisterDiaryService{
 
 export class ResgisterDiaryRequest {
  @IsInt()
+ @ApiProperty()
     public idPatient: number;
   @IsString()
+  @ApiProperty()
   public namePatient:string;
   @IsString()
+  @ApiProperty()
   public nameOphtalmologist:string;
   @IsString()
+  @ApiProperty()
   public status: string;
   @IsString()
+  @ApiProperty()
   public clinicalOrder:string;
 
 }

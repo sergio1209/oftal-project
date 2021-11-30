@@ -11,7 +11,8 @@ import { RegisterPatientRequest } from "../application/registers/register-patien
 import { UpdatePatientService } from "../application/updates/update-patient.service";
 import { UpdateDiaryService } from "../application/updates/update-diary.service";
 import { AuthUsersService } from "src/application/security/auth-users.service";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags('diary')
 @Controller('diary')
 export class DiaryController {
 

@@ -12,7 +12,8 @@ import { UpdateDiaryService } from "../application/updates/update-diary.service"
 import { UpdatePrescriptionService } from "../application/updates/update-prescription.service";
 import { Headers } from "@nestjs/common";
 import { AuthUsersService } from "src/application/security/auth-users.service";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags('prescription')
 @Controller('prescription')
 export class PresciptionController{
 
@@ -42,6 +43,7 @@ export class PresciptionController{
    
     
   }
+
   @Get(':id')
   async queryPresciptionService(@Param('id') cedula: string,@Headers('authorization') token:string ){
     const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);

@@ -1,7 +1,8 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Prescription } from "../../domain/entity/prescription";
 import { IsDateString, IsInt, IsString } from "class-validator";
-import { IsIdentityCard } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+
 
 export class RegisterPrescriptionService {
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -34,13 +35,17 @@ export class RegisterPrescriptionService {
 
 }
 export class ResgisterPrescriptionRequest {
-  @IsInt()
+  @IsInt() 
+  @ApiProperty() 
   public id: number;
-  @IsDateString()
+  @IsDateString() 
+  @ApiProperty() 
   public date: Date;
-  @IsString()
+  @IsString() 
+  @ApiProperty() 
   public professional: string;
   @IsString()
+  @ApiProperty() 
   public description: string;
 }
 export class ResgisterPrescriptionResponse {

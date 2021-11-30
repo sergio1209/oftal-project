@@ -1,15 +1,16 @@
+
 import { Column, Entity, ObjectID, ObjectIdColumn } from "typeorm";
 
 @Entity('Prescriptions')
 export class Prescription{
-  @ObjectIdColumn()
+  @ObjectIdColumn() 
   public _id: ObjectID;
   @Column()
   public id: number;
-  @Column()
+  @Column() 
   public date: Date;
-  @Column()
+  @Column() 
   public professional: string;
-  @Column()
+  @Column() 
   public description: string;
 }

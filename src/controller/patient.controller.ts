@@ -5,7 +5,8 @@ import { QueryOphthalmologistService } from "../application/querys/query-ophthal
 import { QueryPatientService } from "../application/querys/query-patient.service";
 import { UpdatePatientService } from "../application/updates/update-patient.service";
 import { AuthUsersService } from "src/application/security/auth-users.service";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags('patient')
 @Controller('patient')
 export class PatientController{
 

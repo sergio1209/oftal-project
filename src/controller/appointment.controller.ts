@@ -4,8 +4,9 @@ import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import { QueryAppointmentService } from "../application/querys/query-appointment.service";
 import { UpdateAppointmentService } from "../application/updates/update-appoiment.service";
 import { AuthUsersService } from "src/application/security/auth-users.service";
+import { ApiTags } from "@nestjs/swagger";
 
-
+@ApiTags('Appointment')
 @Controller('Appointment')
 export class AppointmentController{
 

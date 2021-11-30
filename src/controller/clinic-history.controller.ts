@@ -7,7 +7,8 @@ import {
 import { QueryClinicHistoryService } from "../application/querys/query-clinic-history.service";
 import { UpdateClinicHistoryService } from "../application/updates/update-clinic-history.service";
 import { AuthUsersService } from "src/application/security/auth-users.service";
-
+import { ApiTags } from "@nestjs/swagger";
+@ApiTags('clinic_History')
 @Controller('clinic_History')
 export class ClinicHistoryController{
 

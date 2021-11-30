@@ -2,6 +2,7 @@ import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { Appointment } from "../../domain/entity/appointment";
 import { UnitOfWork } from "../../infrastructure/base/unit.of.work";
 import { IsDate, IsInt, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class RegisterAppointmentService {
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -40,18 +41,24 @@ export class RegisterAppointmentService {
 
 export class RegisterAppointmentRequest {
  @IsInt()
+ @ApiProperty()
     public idPatient: number;
- @IsDate()
+ @IsDate()@ApiProperty()
   public dateAppointment: Date;
  @IsDate()
+ @ApiProperty()
   public date: Date;
  @IsString()
+ @ApiProperty()
   public hours: string;
   @IsString()
+  @ApiProperty()
   public performAppointment: string;
   @IsString()
+  @ApiProperty()
   public duration: string;
   @IsString()
+  @ApiProperty()
   public status: string;
 
 }

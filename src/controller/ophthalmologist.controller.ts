@@ -10,8 +10,9 @@ import { RegisterPatientRequest } from "../application/registers/register-patien
 import { UpdatePatientService } from "../application/updates/update-patient.service";
 import { UpdateOphthalmologistService } from "../application/updates/update-ophthalmologist.service";
 import { AuthUsersService } from "src/application/security/auth-users.service";
+import { ApiTags } from "@nestjs/swagger";
 
-
+@ApiTags('ophthalmologist')
 @Controller('ophthalmologist')
 export class OphthalmologistController{
 
