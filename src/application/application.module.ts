@@ -21,6 +21,7 @@ import { QueryUsersService } from "./querys/query-users.service";
 import { AuthUsersService } from "./security/auth-users.service";
 import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants } from "./security/constants";
+import { MailerService } from "./mail/mailer.service";
 
 @Module({
   imports: [
@@ -68,8 +69,11 @@ import { jwtConstants } from "./security/constants";
     UpdateOphthalmologistService,
     UpdatePrescriptionService,
     UpdateClinicHistoryService,
-    AuthUsersService
+    AuthUsersService,
+    MailerService
   ],
-
+providers:[
+  MailerService
+]
 })
 export class ApplicationModule{}
