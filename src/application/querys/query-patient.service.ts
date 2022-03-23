@@ -7,9 +7,9 @@ export class QueryPatientService {
   async execute(cedula: string): Promise<MessagePatient>{
 
     try{
-      let searched= await this.unitOfWork.ophthalmologistRepository.find({where: {identification: cedula}});
-      if(searched.length>0){
-        return <MessagePatient>{message: ` se encontraron ${searched.length} cantidad de coincidencias.`,all: searched};
+      let searched= await this.unitOfWork.patientRepository.find({ where: {identification: cedula} });
+      if(searched){
+        return <MessagePatient>{message: ` se encontraron cantidad de coincidencias.`,all: searched};
       }else{
         return <MessagePatient>{message: 'este paciente no se encuentra registrado.'};
       }
