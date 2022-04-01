@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, HttpException, HttpStatus, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Headers, HttpException, HttpStatus, Param, Post, Put, Query } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import {
   RegisterClinicHistoryRequest,
@@ -26,7 +26,19 @@ export class ClinicHistoryController{
     }
   
   }
+  @Get()
+  async queryClinicHistoryPaginate(@Query('page') page: number, @Query('keyword') key: string,@Headers('Authorization') token:string){
 
+    const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);
+    if(verifytoken.verifyToken(token)){
+      const service: QueryClinicHistoryService = new QueryClinicHistoryService(this._unitOfWork);
+      return await service.paginate(page, key);
+    }else{
+     throw new HttpException('Error: no se encontró el usuario', HttpStatus.FORBIDDEN);
+    
+    }
+    
+  }
   @Get(':id')
   async queryClinicHistory(@Param('id') cedula: string ,@Headers('authorization') token:string){
     const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);

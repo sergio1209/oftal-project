@@ -20,4 +20,30 @@ export class QueryPresciptionService {
     }
 
   }
+
+  async paginate(page: number, key: string) {
+    try {
+      console.log(page, key);
+      const take = 15;
+      const keyword = key || '';
+      const pages = page || 1;
+      const skip = (pages - 1) * take;
+
+      const [ result, total] = await this.unitOfWork.presciptionRepository.findAndCount({
+        where: {  $or : [
+          //{  id: new RegExp(`^${keyword}`)     },
+          { professional:  new RegExp(`^${keyword}`) }
+        ]},
+        skip,
+        take
+      });
+      return {
+        count: total,
+        data: result
+      }
+
+    } catch (error) {
+      return <MessagePrescription>{message: error};
+    }
+  }
 }

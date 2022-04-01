@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, HttpException, HttpStatus, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Headers, HttpException, HttpStatus, Param, Post, Put, Query } from "@nestjs/common";
 import { UnitOfWork } from "../infrastructure/base/unit.of.work";
 import {
   RegisterOphthalmologistRequest,
@@ -24,6 +24,19 @@ export class OphthalmologistController{
     if(verifytoken.verifyToken(token)){
       const service: RegisterOphthalmologistService = new RegisterOphthalmologistService(this._unitOfWork);
       return await service.execute(request);
+    }else{
+     throw new HttpException('Error: no se encontró el usuario', HttpStatus.FORBIDDEN);
+    
+    }
+    
+  }
+  @Get()
+  async queryOphthalmologistPaginate(@Query('page') page: number, @Query('keyword') key: string,@Headers('Authorization') token:string){
+
+    const verifytoken: AuthUsersService= new AuthUsersService(this._unitOfWork);
+    if(verifytoken.verifyToken(token)){
+      const service: QueryOphthalmologistService = new QueryOphthalmologistService(this._unitOfWork);
+      return await service.paginate(page, key);
     }else{
      throw new HttpException('Error: no se encontró el usuario', HttpStatus.FORBIDDEN);
     
