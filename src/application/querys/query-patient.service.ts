@@ -1,3 +1,4 @@
+import { Like } from "typeorm";
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
 import { MessageOphthalmologist, MessagePatient } from "../base/messages.signatures";
 
@@ -19,5 +20,31 @@ export class QueryPatientService {
 
     }
 
+  }
+
+  async paginate(page: number, key: string) {
+    try {
+      console.log(page, key);
+      const take = 15;
+      const keyword = key || '';
+      const pages = page || 1;
+      const skip = (pages - 1) * take;
+
+      const [ result, total] = await this.unitOfWork.patientRepository.findAndCount({
+        where: {  $or : [
+          { names: new RegExp(`^${keyword}`)     },
+          { surnames:  new RegExp(`^${keyword}`) }
+        ]},
+        skip,
+        take
+      });
+      return {
+        count: total,
+        data: result
+      }
+
+    } catch (error) {
+      return <MessagePatient>{message: error};
+    }
   }
 }
