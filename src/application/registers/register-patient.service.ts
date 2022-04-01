@@ -71,7 +71,6 @@ export class RegisterPatientService{
 export class RegisterPatientRequest {
   @IsInt()
   @ApiProperty()
-
   public identification: number;
   @IsString()
   @ApiProperty()

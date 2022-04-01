@@ -1,6 +1,6 @@
 import { Like } from "typeorm";
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
-import { MessageOphthalmologist, MessagePatient } from "../base/messages.signatures";
+import { MessagePatient } from "../base/messages.signatures";
 
 export class QueryPatientService {
   constructor(private readonly unitOfWork: IUnitOfWork) {}
@@ -8,9 +8,11 @@ export class QueryPatientService {
   async execute(cedula: string): Promise<MessagePatient>{
 
     try{
+
       let searched= await this.unitOfWork.patientRepository.find({ where: {identification: cedula} });
       if(searched){
         return <MessagePatient>{message: ` se encontraron cantidad de coincidencias.`,all: searched};
+
       }else{
         return <MessagePatient>{message: 'este paciente no se encuentra registrado.'};
       }
