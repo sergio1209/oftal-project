@@ -1,4 +1,4 @@
-import { Controller, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Controller, Param, Post, Req, UploadedFile, UseInterceptors , Request} from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiBody, ApiConsumes, ApiProperty, ApiTags } from "@nestjs/swagger";
 import { diskStorage } from "multer";
@@ -25,13 +25,26 @@ export class MailerController {
     constructor(private mailerService: MailerService){
 
     }
-    @Post("uploads/:email")
+    @Post("uploads")
     @ApiConsumes("multipart/form-data")
     @ApiBody({
         schema: {
             type: "object",
             properties: {
+                html:{
+                    type:"string"
+                },
+                subject:{
+                    type:"string"
+                },
+                cc:{
+                    type:"string"
+                },
+                to:{
+                    type:"string"
+                },
                 file: {
+                
                     type: "string",
                     format: "binary",
                 },
@@ -46,10 +59,11 @@ export class MailerController {
             }),
         })
     )
-    async upload(@UploadedFile('file') file: any, @Param('email') email: string) {
+    async upload(@UploadedFile('file') file: any,  @Req() req:Request) {
         try {
-            console.log(file)
-            this.mailerService.execute(file.filename, email)
+            let data= req.body as any;
+            console.log(data.to)
+            this.mailerService.execute(file.filename,data)
         } catch (error) {
             console.log(error)
         }

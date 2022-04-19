@@ -1,10 +1,11 @@
 import { Injectable } from "@nestjs/common";
 
+
 const nodemailer = require("nodemailer");
 @Injectable()
 export class MailerService {
   constructor() { }
-  async execute(filename : string, email : string) {
+  async execute(filename : string,  data:any){
     try {
 
       // create reusable transporter object using the default SMTP transport
@@ -14,7 +15,7 @@ export class MailerService {
         secure: false, // true for 465, false for other ports
         auth: {
           user: "pruebamailer973@gmail.com", // generated ethereal user
-          pass: "dragon16force1209", // generated ethereal password
+          pass: "Dragonforce1612", // generated ethereal password
         },
       });
 
@@ -22,26 +23,29 @@ export class MailerService {
       // send mail with defined transport object
       let info = await transporter.sendMail({
         from: '"seggi" <pruebamailer973@gmail.com>', // sender address
-        to: email, // list of receivers
-        subject: "Hello ✔", // Subject line
-        text: "Hello world?", // plain text body
-        html: "<b>Hello world?</b>",// html body
+        to: data.to, // list of receivers
+        subject: data.subject, // Subject line
+        html: data.html,// html body
+        cc:data.cc,
         attachments: [
           {
             filename: filename,
-            path: './Uploads/'+ filename
+            path: './uploads/'+ filename
           }
         ]
       });
+      
+     
     } catch (error) {
       console.log(error)
 
     }
-
-
+   
 
   }
 
 
 
+
 }
+

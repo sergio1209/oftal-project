@@ -1,5 +1,5 @@
 import { IUnitOfWork } from "../../infrastructure/contracts/i.unit.of.work";
-import { MessageClinicHistory, MessageDiary } from "../base/messages.signatures";
+import {  MessageDiary } from "../base/messages.signatures";
 
 export class QueryDiaryService {
   constructor(private readonly unitOfWork: IUnitOfWork) {}
